@@ -1,4 +1,6 @@
+
 class ParkingSpace {
+
   String id;
   int status;
   String last_update;

@@ -1,11 +1,10 @@
 import 'dart:collection';
-import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:dio/dio.dart';
-import 'package:parking_app/model/parkingSpace.dart';
-import 'package:parking_app/widget/parkingSlotWidget.dart';
+import 'package:parking_app/model/parking_space.dart';
+import 'package:parking_app/ui/widget/parking_slot_widget.dart';
 
 // ignore: must_be_immutable
 class Home extends StatefulWidget {

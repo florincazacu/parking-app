@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:parking_app/model/parkingSpace.dart';
+import 'package:parking_app/model/parking_space.dart';
 
 class ParkingSlotWidget {
 
