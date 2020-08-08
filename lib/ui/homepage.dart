@@ -1,16 +1,10 @@
-import 'dart:collection';
-import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
-import 'package:dio/dio.dart';
-import 'package:parking_app/geofence/geofencing_handler.dart';
-import 'package:parking_app/model/parking_space.dart';
+import 'package:parking_app/geofence/geofence_handler.dart';
 import 'package:parking_app/requests/parking_slots_request.dart';
 import 'package:parking_app/ui/widget/parking_slot_widget.dart';
 
-//import 'package:flutter_geofence/geofence.dart';
 import 'package:parking_app/notifications/notification_handler.dart';
 
 ParkingSlotsRequest parkingSlotsRequest = new ParkingSlotsRequest();
@@ -30,8 +24,7 @@ class Home extends StatefulWidget {
 class HomePageState extends State<Home> {
   ParkingSlotWidget parkingSlotWidget = new ParkingSlotWidget();
   List<Widget> widgets = [];
-//  GeofenceHandler geofenceHandler = GeofenceHandler();
-  GeofencingHandler geofencingHandler = GeofencingHandler();
+  GeofenceHandler geofenceHandler = GeofenceHandler();
 
   @override
   Widget build(BuildContext context) {
@@ -53,18 +46,18 @@ class HomePageState extends State<Home> {
     NotificationHandler.initNotification();
     createWidgets();
     Future<List<Widget>>.value(widgets);
-//    initGeofence();
-    geofencingHandler.initPlatformState();
+    initGeofence();
     setState(() {});
   }
 
-//  initGeofence() async {
-//    GeofenceHandler.initialize();
-//    geofenceHandler.addLocation("Rosetti Tower", 44.413038, 26.152583, 30.0);
-//    parkingSlotsRequest.fetchStatus().then((parkingLot) {
-//      geofenceHandler.startListening(parkingLot);
-//    });
-//  }
+  initGeofence() async {
+    GeofenceHandler.initialize();
+    geofenceHandler.addLocation("Rosetti Tower", 44.413038, 26.152583, 30.0);
+    geofenceHandler.addLocation("Shaorma Socului", 44.433786, 26.154179, 3000.0);
+    parkingSlotsRequest.fetchStatus().then((parkingLot) {
+      geofenceHandler.startListening(parkingLot);
+    });
+  }
 
   void createWidgets() {
     parkingSlotsRequest.fetchStatus().then((parkingLot) {
@@ -85,8 +78,7 @@ class HomePageState extends State<Home> {
     widgets.add(RaisedButton(
         child: Text("Get current location"),
         onPressed: () {
-//          geofenceHandler.getCurrentLocation();
-          geofencingHandler.getCurrentLocation();
+          geofenceHandler.getCurrentLocation();
         }));
   }
 }
