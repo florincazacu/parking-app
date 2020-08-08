@@ -79,7 +79,7 @@ class _MyAppState extends State<MyApp> {
     final SendPort send =
         IsolateNameServer.lookupPortByName('geofencing_send_port');
     send?.send(e.toString());
-    notificationHandler.scheduleNotification("title", "subtitle");
+//    notificationHandler.scheduleNotification("title", "subtitle");
 //    await _showNotification();
 //    _onGeofence(e);
   }

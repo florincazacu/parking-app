@@ -3,6 +3,7 @@ package com.example.parking_app
 import io.flutter.app.FlutterApplication
 import io.flutter.plugin.common.PluginRegistry
 import io.flutter.plugin.common.PluginRegistry.PluginRegistrantCallback
+import com.dexterous.flutterlocalnotifications.FlutterLocalNotificationsPlugin
 
 class Application : FlutterApplication(), PluginRegistry.PluginRegistrantCallback {
 
@@ -12,6 +13,6 @@ class Application : FlutterApplication(), PluginRegistry.PluginRegistrantCallbac
 
     override fun registerWith(registry: PluginRegistry) {
         FlutterLocalNotificationPluginRegistrant.registerWith(registry)
-
+        FlutterLocalNotificationsPlugin.registerWith(registry!!.registrarFor("com.dexterous.flutterlocalnotifications.FlutterLocalNotificationsPlugin"));
     }
 }
