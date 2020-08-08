@@ -1,10 +1,19 @@
 import 'dart:collection';
+import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
 import 'package:dio/dio.dart';
+import 'package:parking_app/geofence/geofencing_handler.dart';
 import 'package:parking_app/model/parking_space.dart';
+import 'package:parking_app/requests/parking_slots_request.dart';
 import 'package:parking_app/ui/widget/parking_slot_widget.dart';
+
+//import 'package:flutter_geofence/geofence.dart';
+import 'package:parking_app/notifications/notification_handler.dart';
+
+ParkingSlotsRequest parkingSlotsRequest = new ParkingSlotsRequest();
 
 // ignore: must_be_immutable
 class Home extends StatefulWidget {
@@ -21,6 +30,8 @@ class Home extends StatefulWidget {
 class HomePageState extends State<Home> {
   ParkingSlotWidget parkingSlotWidget = new ParkingSlotWidget();
   List<Widget> widgets = [];
+//  GeofenceHandler geofenceHandler = GeofenceHandler();
+  GeofencingHandler geofencingHandler = GeofencingHandler();
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +50,24 @@ class HomePageState extends State<Home> {
   @override
   initState() {
     super.initState();
+    NotificationHandler.initNotification();
     createWidgets();
     Future<List<Widget>>.value(widgets);
+//    initGeofence();
+    geofencingHandler.initPlatformState();
+    setState(() {});
   }
 
+//  initGeofence() async {
+//    GeofenceHandler.initialize();
+//    geofenceHandler.addLocation("Rosetti Tower", 44.413038, 26.152583, 30.0);
+//    parkingSlotsRequest.fetchStatus().then((parkingLot) {
+//      geofenceHandler.startListening(parkingLot);
+//    });
+//  }
+
   void createWidgets() {
-    fetchStatus().then((parkingLot) {
+    parkingSlotsRequest.fetchStatus().then((parkingLot) {
       setState(() {
         if (parkingLot != null) {
           parkingLot.forEach((floor, parkingSpaces) {
@@ -59,32 +82,11 @@ class HomePageState extends State<Home> {
         }
       });
     });
-  }
-
-  Future<Map<String, List<ParkingSpace>>> fetchStatus() async {
-    Map<String, List<ParkingSpace>> parkingLot = new LinkedHashMap();
-    final response = await Dio()
-        .get('http://parcare.flashoffices.com/parking-spaces-status');
-
-    if (response.statusCode == 200) {
-      Map map = response.data['parking_spaces'] as LinkedHashMap;
-      for (String floor in map.keys) {
-        List<ParkingSpace> parkingSpaces = [];
-        (map[floor] as List).forEach((parkingSpace) {
-          String id = parkingSpace["id"];
-          int status = parkingSpace["status"];
-          String last_update = parkingSpace["last_update"];
-          parkingSpaces.add(new ParkingSpace(
-              id: id, status: status, last_update: last_update));
-        });
-        parkingLot.putIfAbsent(floor, () => parkingSpaces);
-      }
-
-      return parkingLot;
-    } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      throw Exception('Failed to load data');
-    }
+    widgets.add(RaisedButton(
+        child: Text("Get current location"),
+        onPressed: () {
+//          geofenceHandler.getCurrentLocation();
+          geofencingHandler.getCurrentLocation();
+        }));
   }
 }

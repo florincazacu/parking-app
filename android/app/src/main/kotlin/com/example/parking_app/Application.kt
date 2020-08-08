@@ -1,23 +1,17 @@
 package com.example.parking_app
 
 import io.flutter.app.FlutterApplication
-import io.flutter.view.FlutterMain
 import io.flutter.plugin.common.PluginRegistry
 import io.flutter.plugin.common.PluginRegistry.PluginRegistrantCallback
-import io.flutter.plugins.FirebaseCloudMessagingPluginRegistrant;
-import com.dexterous.flutterlocalnotifications.FlutterLocalNotificationsPlugin
 
-class Application : FlutterApplication(), PluginRegistrantCallback {
+class Application : FlutterApplication(), PluginRegistry.PluginRegistrantCallback {
 
     override fun onCreate() {
         super.onCreate()
-        FlutterMain.startInitialization(this)
     }
 
     override fun registerWith(registry: PluginRegistry) {
-        if (!registry!!.hasPlugin("com.dexterous.flutterlocalnotifications")) {
-            FlutterLocalNotificationsPlugin.registerWith(registry!!.registrarFor("com.dexterous.flutterlocalnotifications.FlutterLocalNotificationsPlugin"));
-            FirebaseCloudMessagingPluginRegistrant.registerWith(registry);
-        }
+        FlutterLocalNotificationPluginRegistrant.registerWith(registry)
+
     }
 }
