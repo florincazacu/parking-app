@@ -64,25 +64,11 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
-  firebase_messaging:
-    dependency: "direct main"
-    description:
-      name: firebase_messaging
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "6.0.16"
   flutter:
     dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_geofence:
-    dependency: "direct main"
-    description:
-      name: flutter_geofence
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.0"
   flutter_local_notifications:
     dependency: "direct main"
     description:
@@ -105,11 +91,9 @@ packages:
   geofencing:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "9ebed3d38585065e773afe44df919cf3913a8d68"
-      url: "https://github.com/bkonyi/FlutterGeofencing"
-    source: git
+      path: "C:\\Users\\Florin\\Downloads\\FlutterGeofencing-master"
+      relative: false
+    source: path
     version: "0.0.1"
   http:
     dependency: "direct main"
@@ -244,4 +228,4 @@ packages:
     version: "2.0.8"
 sdks:
   dart: ">=2.9.0-14.0.dev <3.0.0"
-  flutter: ">=1.12.13+hotfix.5 <2.0.0"
+  flutter: ">=1.12.13+hotfix.5"

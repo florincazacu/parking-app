@@ -36,6 +36,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
+  static NotificationHandler notificationHandler = new NotificationHandler();
+
   String geofenceState = 'N/A';
   List<String> registeredGeofences = [];
   double latitude = 44.412995;
@@ -58,7 +61,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-
+    WidgetsFlutterBinding.ensureInitialized();
     IsolateNameServer.registerPortWithName(
         port.sendPort, 'geofencing_send_port');
     port.listen((dynamic data) {
@@ -67,6 +70,7 @@ class _MyAppState extends State<MyApp> {
         geofenceState = data;
       });
     });
+    NotificationHandler.initNotification();
     initPlatformState();
   }
 
@@ -75,7 +79,8 @@ class _MyAppState extends State<MyApp> {
     final SendPort send =
         IsolateNameServer.lookupPortByName('geofencing_send_port');
     send?.send(e.toString());
-    await _showNotification();
+    notificationHandler.scheduleNotification("title", "subtitle");
+//    await _showNotification();
 //    _onGeofence(e);
   }
 
@@ -114,7 +119,8 @@ class _MyAppState extends State<MyApp> {
                       child: RaisedButton(
                         child: const Text('Register'),
                         onPressed: () async {
-                          await _showNotification();
+//                          await _showNotification();
+                        notificationHandler.scheduleNotification("My app", "Button");
                           if (latitude == null) {
                             setState(() => latitude = 0.0);
                           }
@@ -202,17 +208,17 @@ class _MyAppState extends State<MyApp> {
 ////    });
 //  }
 
-  static Future<Null> _showNotification() async {
-    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
-        'dexterous.com.flutter.local_notifications', 'your channel name', 'your channel description',
-        importance: Importance.Max,
-        priority: Priority.High);
-    var iOSPlatformChannelSpecifics =
-    new IOSNotificationDetails();
-    var platformChannelSpecifics = new NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-    await NotificationHandler.flutterLocalNotificationsPlugin.show(
-        0, 'Entered parking area', 'plain body', platformChannelSpecifics,
-        payload: 'item x');
-  }
+//  static Future<Null> _showNotification() async {
+//    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+//        'dexterous.com.flutter.local_notifications', 'your channel name', 'your channel description',
+//        importance: Importance.Max,
+//        priority: Priority.High);
+//    var iOSPlatformChannelSpecifics =
+//    new IOSNotificationDetails();
+//    var platformChannelSpecifics = new NotificationDetails(
+//        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+//    await NotificationHandler.flutterLocalNotificationsPlugin.show(
+//        0, 'Entered parking area', 'plain body', platformChannelSpecifics,
+//        payload: 'item x');
+//  }
 }

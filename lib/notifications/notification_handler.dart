@@ -1,10 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) async {
-  print("onBackgroundMessage: $message");
-  //_showBigPictureNotification(message);
-  return Future<void>.value();
-}
 
 class NotificationHandler {
 
@@ -23,22 +18,6 @@ class NotificationHandler {
         onSelectNotification: onSelectNotification);
   }
 
-  Future _showNotificationWithDefaultSound(String title, String message) async {
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        'channel_id', 'channel_name', 'channel_description',
-        importance: Importance.Max, priority: Priority.High);
-    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
-    var platformChannelSpecifics = NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-    await flutterLocalNotificationsPlugin.show(
-      0,
-      '$title',
-      '$message',
-      platformChannelSpecifics,
-      payload: 'Default_Sound',
-    );
-  }
-
   static Future onSelectNotification(String payload) async {
     if (payload != null) {
       print('notification payload: ' + payload);
@@ -51,7 +30,7 @@ class NotificationHandler {
   }
 
   void scheduleNotification(String title, String subtitle) {
-    Future.delayed(Duration(seconds: 5)).then((result) async {
+    Future.delayed(Duration(seconds: 1)).then((result) async {
       var androidPlatformChannelSpecifics = AndroidNotificationDetails(
           'your channel id', 'your channel name', 'your channel description',
           importance: Importance.Max,

@@ -1,6 +1,5 @@
 package com.example.parking_app
 
-
 import io.flutter.plugin.common.PluginRegistry
 import com.dexterous.flutterlocalnotifications.FlutterLocalNotificationsPlugin
 //import io.flutter.plugins.firebasemessaging.FirebaseMessagingPlugin
@@ -28,4 +27,5 @@ class FlutterLocalNotificationPluginRegistrant {
             registry.registrarFor(key)
             return false
         }
-    }}
+    }
+}

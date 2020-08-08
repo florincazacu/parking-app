@@ -27,13 +27,13 @@ dependencies:
   http: ^0.12.2
   dio: ^3.0.9
   flutter_local_notifications: ^1.4.4+2
-  flutter_geofence: ^0.2.0
+#  flutter_geofence: ^0.2.0
   geofencing:
-      git:
-        url: https://github.com/bkonyi/FlutterGeofencing
+    path: 'C:\Users\Florin\Downloads\FlutterGeofencing-master'
+#      git:
+#        url: https://github.com/bkonyi/FlutterGeofencing
 
   rxdart: ^0.23.1
-  firebase_messaging: ^6.0.16
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -55,8 +55,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-    - assets/secrets.json
+#  assets:
+#    - assets/secrets.json
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
