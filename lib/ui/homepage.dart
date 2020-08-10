@@ -43,20 +43,24 @@ class HomePageState extends State<Home> {
   @override
   initState() {
     super.initState();
-    NotificationHandler.initNotification();
+    WidgetsFlutterBinding.ensureInitialized();
+    NotificationHandler.initNotifications();
     createWidgets();
     Future<List<Widget>>.value(widgets);
     initGeofence();
-    setState(() {});
   }
 
-  initGeofence() async {
-    GeofenceHandler.initialize();
-    geofenceHandler.addLocation("Rosetti Tower", 44.413038, 26.152583, 30.0);
-    geofenceHandler.addLocation("Shaorma Socului", 44.433786, 26.154179, 3000.0);
-    parkingSlotsRequest.fetchStatus().then((parkingLot) {
-      geofenceHandler.startListening(parkingLot);
+  Future<void> initGeofence() async {
+    if (!mounted) return;
+    await geofenceHandler.initialize();
+    await geofenceHandler.addLocation("Home", 44.412770, 26.152320, 300.0);
+//    geofenceHandler.addLocation("Rosetti Tower", 44.433786, 26.154179, 30000.0);
+    await parkingSlotsRequest.fetchStatus().then((parkingLot) {
+      if (parkingLot != null && parkingLot.isNotEmpty) {
+        geofenceHandler.startListening(parkingLot);
+      }
     });
+    setState(() {});
   }
 
   void createWidgets() {
