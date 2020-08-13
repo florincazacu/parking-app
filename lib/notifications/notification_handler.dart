@@ -30,7 +30,7 @@ class NotificationHandler {
   }
 
   void scheduleNotification(String title, String subtitle) {
-    Future.delayed(Duration(seconds: 1)).then((result) async {
+    Future.delayed(Duration(seconds: 5)).then((result) async {
       var androidPlatformChannelSpecifics = AndroidNotificationDetails(
           'your channel id', 'your channel name', 'your channel description',
           importance: Importance.Max,

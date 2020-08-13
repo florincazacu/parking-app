@@ -9,7 +9,7 @@ class ParkingApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      home: Home(title: "Parking App"),
+      home: Home(title: "Tellence Parking"),
     );
   }
 }

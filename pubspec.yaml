@@ -26,8 +26,8 @@ dependencies:
   intl: ^0.16.1
   http: ^0.12.2
   dio: ^3.0.9
-#  flutter_local_notifications: ^1.4.4+2
-  flutter_local_notifications: ^0.9.1
+  flutter_local_notifications: ^1.4.4+2
+#  flutter_local_notifications: ^0.9.1
   flutter_geofence: ^0.2.0
 #  geofencing:
 #    path: 'C:\Users\Florin\Downloads\FlutterGeofencing-master'

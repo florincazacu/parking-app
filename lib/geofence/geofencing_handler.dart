@@ -58,7 +58,7 @@
 //        });
 //      });
 //      notificationHandler.scheduleNotification(
-//          "Parking App", "Welcome to $l, free parking spaces: $freeSlots");
+//          "Tellence Parking", "Welcome to $l, free parking spaces: $freeSlots");
 //    });
 //  }
 //

@@ -1,17 +1,15 @@
 import 'dart:collection';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:parking_app/model/parking_space.dart';
 
 class ParkingSlotsRequest {
-
   Future<Map<String, List<ParkingSpace>>> fetchStatus() async {
-    Map<String, List<ParkingSpace>> parkingLot = new LinkedHashMap();
     final response = await Dio()
         .get('http://parcare.flashoffices.com/parking-spaces-status');
 
     if (response.statusCode == 200) {
+      Map<String, List<ParkingSpace>> parkingLot = new LinkedHashMap();
       Map map = response.data['parking_spaces'] as LinkedHashMap;
       for (String floor in map.keys) {
         List<ParkingSpace> parkingSpaces = [];
@@ -24,7 +22,6 @@ class ParkingSlotsRequest {
         });
         parkingLot.putIfAbsent(floor, () => parkingSpaces);
       }
-
       return parkingLot;
     } else {
       // If the server did not return a 200 OK response,

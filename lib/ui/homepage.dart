@@ -18,10 +18,11 @@ class Home extends StatefulWidget {
   HomePageState createState() => new HomePageState();
 
   DateTime d =
-      DateFormat('yyyy-MM-dd\'T\'HH:mm:ss').parse("2020-07-30T19:10:51");
+  DateFormat('yyyy-MM-dd\'T\'HH:mm:ss').parse("2020-07-30T19:10:51");
 }
 
 class HomePageState extends State<Home> {
+
   ParkingSlotWidget parkingSlotWidget = new ParkingSlotWidget();
   List<Widget> widgets = [];
   GeofenceHandler geofenceHandler = GeofenceHandler();
@@ -53,13 +54,10 @@ class HomePageState extends State<Home> {
   Future<void> initGeofence() async {
     if (!mounted) return;
     await geofenceHandler.initialize();
-    await geofenceHandler.addLocation("Home", 44.412770, 26.152320, 300.0);
-//    geofenceHandler.addLocation("Rosetti Tower", 44.433786, 26.154179, 30000.0);
-    await parkingSlotsRequest.fetchStatus().then((parkingLot) {
-      if (parkingLot != null && parkingLot.isNotEmpty) {
-        geofenceHandler.startListening(parkingLot);
-      }
-    });
+//    await geofenceHandler.addLocation("Home", 44.412770, 26.152320, 300.0);
+    await geofenceHandler.addLocation("Rosetti Tower", 44.441807, 26.106423, 500.0);
+//    await geofenceHandler.addLocation("Park Lake", 44.420636, 26.149656, 300.0);
+//    await geofenceHandler.addLocation("Farm Tei", 44.420454, 26.141516, 150.0);
     setState(() {});
   }
 
@@ -79,10 +77,11 @@ class HomePageState extends State<Home> {
         }
       });
     });
-    widgets.add(RaisedButton(
-        child: Text("Get current location"),
-        onPressed: () {
-          geofenceHandler.getCurrentLocation();
-        }));
+//    widgets.add(RaisedButton(
+//        child: Text("Get current location"),
+//        onPressed: () {
+//          geofenceHandler.getCurrentLocation();
+//          geofenceHandler.addLocation("Home", 44.412770, 26.152320, 300.0);
+//        }));
   }
 }

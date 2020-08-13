@@ -7,7 +7,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="parking_app"
+        android:label="Tellence Parking"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
@@ -62,13 +62,14 @@
 <!--                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>-->
             </intent-filter>
         </receiver>
-<!--        <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />-->
+        <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-<!--    <uses-permission android:name="android.permission.WAKE_LOCK" />-->
-<!--    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>-->
-<!--    <uses-permission android:name="android.permission.VIBRATE" />-->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--    <uses-permission android:name="android.permission.VIBRATE" />-->
 </manifest>
